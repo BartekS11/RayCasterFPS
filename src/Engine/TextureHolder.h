@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 
+//Class provides that textures are loaded only once
 class TextureHolder
 {
 private:
