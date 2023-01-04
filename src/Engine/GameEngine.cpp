@@ -15,6 +15,11 @@ GameEngine::GameEngine()
 
 }
 
+void GameEngine::setm_PlayingOpposite()
+{
+	m_Playing = !m_Playing;
+}
+
 void GameEngine::run()
 {
 	sf::Clock clock;

@@ -1,47 +1,54 @@
 #pragma once
 #include "Constants.h"
+#include <cmath>
+#include <SFML/Graphics.hpp>
+#include "../Levels/LevelManager.h"
+#include "../Character/Player.h"
 
 class RayCasting
 {
 private:
-
-	//
 	float m_cameraX = 0.f;
 
+	Player* player;
 	// Start position
-	float posX = 22.f, posY = 12.f;
+	sf::Vector2f m_pos = player->getPlayerStartingPosition();
 
-	float m_rayDirX = -1.f;
-	float m_rayDirY = 0.f;
+	//Define ray x and y direction
+	sf::Vector2f m_rayDir;
 
 	// Camera plane (2d so its line)
-	float m_planeX = 0.f;
-	float m_planeY = 0.66f;
+	sf::Vector2f m_plane;
 
 	// Current time of frame
-	float timeCount = 0.f;
+	float m_timeCount = 0.f;
 
 	// Which box on the map ray is in
-	int m_mapX = 0;
-	int m_mapY = 0;
+	sf::Vector2i m_map;
 
 	// Lenght of ray
-	float m_sideDistX = 0.f;
-	float m_sideDistY = 0.f;
+	sf::Vector2f m_sideDist;
 
-	// 
-	float m_deltaDistX = 0.f;
-	float m_deltaDistY = 0.f;
+	// Length of distance that ray has to travel
+	sf::Vector2f m_deltaDist;
+
+	// Pointer to 2d array with level loaded
+	int** m_ArrayLevel = nullptr;
 
 	float m_prepWallDist = 0.f;
 
-	int stepX = 0;
-	int stepY = 0;
+	
+	// Step to the next block
+	sf::Vector2i m_step;
 
-	int hit = 0;
-	int side = 0;
+	LevelManager m_LM;
 
+	int m_hit = 0;
+	int m_side = 0;
+
+	void loadLevel();
 public:
 	RayCasting();
+	void draw(sf::RenderWindow& window);
 	void update(float dtAsSeconds);
 };
